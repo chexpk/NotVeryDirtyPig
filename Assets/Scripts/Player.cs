@@ -9,16 +9,9 @@ public class Player : MonoBehaviour
     private PlayerMovement playerMovement;
     private int countOfEatedFood = 0;
 
-    // Start is called before the first frame update
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void IncreaseCountOfEatenFood()
@@ -30,7 +23,6 @@ public class Player : MonoBehaviour
     {
         playerMovement.SetIsMove(false);
         playerEndGame.Invoke();
-        //endGame
     }
 
     public void Restart()

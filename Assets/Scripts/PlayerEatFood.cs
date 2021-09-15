@@ -9,12 +9,8 @@ public class PlayerEatFood : MonoBehaviour
     [SerializeField] private UnityEvent foodEaten;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Food>())
-        {
-            other.GetComponent<Food>().WasEaten();
-            //increase count 'coin'?
-            //send position to Enemy?
-            foodEaten.Invoke();
-        }
+        if (!other.gameObject.GetComponent<Food>()) return;
+        other.GetComponent<Food>().WasEaten();
+        foodEaten.Invoke();
     }
 }

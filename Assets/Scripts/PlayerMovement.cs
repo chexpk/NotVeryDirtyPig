@@ -28,6 +28,16 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
+    public void SetIsMove(bool move)
+    {
+        IsMove = move;
+    }
+
+    public void PutToSpawnPosition()
+    {
+        transform.position = spawnPoint;
+    }
+
     void PlayAnimationOfMove()
     {
         animator.SetFloat("Horizontal", movement.x);
@@ -55,15 +65,5 @@ public class PlayerMovement : MonoBehaviour
     private void ChangeZPositionOnScene()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
-    }
-
-    public void SetIsMove(bool move)
-    {
-        IsMove = move;
-    }
-
-    public void PutToSpawnPosition()
-    {
-        transform.position = spawnPoint;
     }
 }

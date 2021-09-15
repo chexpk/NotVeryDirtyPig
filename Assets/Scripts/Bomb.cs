@@ -16,12 +16,6 @@ public class Bomb : MonoBehaviour
         ChangeZPositionOnScene();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void Explosion()
     {
         _renderer.enabled = false;

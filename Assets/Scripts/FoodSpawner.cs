@@ -13,12 +13,6 @@ public class FoodSpawner : MonoBehaviour
         CreatFoodOnRandomPosition();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CreatFoodOnRandomPosition()
     {
         var position = GetRandomPosition();

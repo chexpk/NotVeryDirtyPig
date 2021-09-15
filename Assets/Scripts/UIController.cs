@@ -9,18 +9,6 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject restartGO;
     [SerializeField] GameObject startGO;
 
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ShowControlUI(bool show)
     {
         joystickGO.SetActive(show);

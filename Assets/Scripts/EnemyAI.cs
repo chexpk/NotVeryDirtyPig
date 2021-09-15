@@ -11,8 +11,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private int increaseSpeedBy = 3;
     [SerializeField] private float timeToClean = 3f;
 
-    [SerializeField] private EnemyAnimation enemyAnimation;
-
+    private EnemyAnimation enemyAnimation;
     private Vector3 respawnPoint = new Vector3(6.7f, -4.24f, -4.24f);
     private NavMeshAgent agent;
     private bool IsDirty = false;
@@ -35,6 +34,42 @@ public class EnemyAI : MonoBehaviour
         ChangeZPositionOnScene();
     }
 
+    public void Restart()
+    {
+        transform.position = respawnPoint;
+        IsMove = true;
+        StartWalk();
+    }
+
+    public void RunToEatenFood()
+    {
+        if (IsDirty) return;
+        StopMove();
+        SetPlayerTargetPoint();
+        IncreaseSpeed();
+        StartMove();
+    }
+
+    public void Dirty()
+    {
+        StopMove();
+        SetNormalSpeed();
+        SetIsDirty(true);
+        Invoke("Clean", timeToClean);
+
+    }
+    public void StopMove()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        IsMove = false;
+    }
+
+    private void StartMove()
+    {
+        agent.isStopped = false;
+        IsMove = true;
+    }
     void SetPlayerTargetPoint()
     {
         agent.SetDestination(targetPlayer.position);
@@ -54,28 +89,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void RunToEatenFood()
-    {
-        if (IsDirty) return;
-        StopMove();
-        SetPlayerTargetPoint();
-        IncreaseSpeed();
-        StartMove();
-    }
-
-    private void StartMove()
-    {
-        agent.isStopped = false;
-        IsMove = true;
-    }
-
-    public void StopMove()
-    {
-        agent.isStopped = true;
-        agent.ResetPath();
-        IsMove = false;
-    }
-
     void IncreaseSpeed()
     {
         agent.speed = speedEnemy * increaseSpeedBy;
@@ -86,19 +99,10 @@ public class EnemyAI : MonoBehaviour
         agent.speed = speedEnemy;
     }
 
-    public void Dirty()
-    {
-        StopMove();
-        SetNormalSpeed();
-        SetIsDirty(true);
-        Invoke("Clean", timeToClean);
-
-    }
-
     void Clean()
     {
         SetIsDirty(false);
-        if (IsMove == false) return;
+        // if (IsMove == false) return;
         StartMove();
         StartWalk();
     }
@@ -118,13 +122,6 @@ public class EnemyAI : MonoBehaviour
     void ChangeZPositionOnScene()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
-    }
-
-    public void Restart()
-    {
-        transform.position = respawnPoint;
-        IsMove = true;
-        StartWalk();
     }
 
     void SetIsDirty(bool dirty)
