@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Joystick joystick;
 
-    private Vector3 spawnPoint = new Vector3(-8.5f,0.8f, 0.8f);
+    private Vector3 spawnPoint = new Vector3(-8.4f,-0.23f, -0.23f);
     private Vector2 movement;
     private bool IsMove = true;
 

@@ -13,6 +13,7 @@ public class Bomb : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
         Invoke("Explosion", bombTimer);
+        ChangeZPositionOnScene();
     }
 
     // Update is called once per frame
@@ -31,5 +32,10 @@ public class Bomb : MonoBehaviour
     void DestroyGO()
     {
         Destroy(gameObject);
+    }
+
+    void ChangeZPositionOnScene()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 }
