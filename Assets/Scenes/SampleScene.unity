@@ -2707,7 +2707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a993f0ccee5943e49c32855f49e4da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPlayer: {fileID: 529585500}
+  targetPlayer: {fileID: 948582753}
   movementPositions:
   - {fileID: 529585500}
   - {fileID: 1741119594}
@@ -5039,6 +5039,18 @@ MonoBehaviour:
       - m_Target: {fileID: 948582757}
         m_TargetAssemblyTypeName: PlayerBombEmitter, Assembly-CSharp
         m_MethodName: PutBombOnCurrentPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 569094945}
+        m_TargetAssemblyTypeName: EnemyAI, Assembly-CSharp
+        m_MethodName: SetPlayerTargetPoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

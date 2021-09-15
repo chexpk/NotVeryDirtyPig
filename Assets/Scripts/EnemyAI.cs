@@ -7,6 +7,10 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform targetPlayer;
     [SerializeField] private Transform[] movementPositions;
+
+    [SerializeField] private float speedEnemy = 2.5f;
+
+    [SerializeField] private int increaseSpeedBy = 3;
     private NavMeshAgent agent;
     private bool IsAngry = false;
 
@@ -42,12 +46,11 @@ public class EnemyAI : MonoBehaviour
 
     void Walk()
     {
-        if(IsAngry == true) return;
-
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
+            IsAngry = false;
+            agent.speed = speedEnemy;
             SetTargetPoint(GetRandomPositionToMove());
-            // normalize speed
         }
     }
 
@@ -58,10 +61,11 @@ public class EnemyAI : MonoBehaviour
 
     public void RunToEatenFood()
     {
-        Debug.Log("run");
         IsAngry = true;
         agent.isStopped = true;
         agent.ResetPath();
+        agent.isStopped = false;
         SetPlayerTargetPoint();
+        agent.speed = speedEnemy * increaseSpeedBy;
     }
 }
