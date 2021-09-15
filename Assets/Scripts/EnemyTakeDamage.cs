@@ -5,27 +5,18 @@ using UnityEngine;
 
 public class EnemyTakeDamage : MonoBehaviour
 {
+    private EnemyAI enemyAI;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<Explosion>())
         {
-            Debug.Log("take damage");
-            //change animation
-            //stop move
-            //start Walk by time
+            enemyAI.Dirty();
         }
     }
 }

@@ -7,23 +7,29 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform targetPlayer;
     [SerializeField] private Transform[] movementPositions;
-
     [SerializeField] private float speedEnemy = 2.5f;
-
     [SerializeField] private int increaseSpeedBy = 3;
+    [SerializeField] private float timeToClean = 3f;
+
     private NavMeshAgent agent;
     private bool IsAngry = false;
+    private bool IsDirty = false;
+    private bool IsMove = true;
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        StartWalk();
     }
 
     void Update()
     {
-        Walk();
+        if (IsMove == false) return;
+        ContinueWalk();
         ChangeZPositionOnScene();
     }
 
@@ -44,12 +50,17 @@ public class EnemyAI : MonoBehaviour
         return movementPositions[randomIndex].position;
     }
 
-    void Walk()
+    void StartWalk()
+    {
+        SetTargetPoint(GetRandomPositionToMove());
+    }
+
+    void ContinueWalk()
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             IsAngry = false;
-            agent.speed = speedEnemy;
+            SetNormalSpeed();
             SetTargetPoint(GetRandomPositionToMove());
         }
     }
@@ -62,10 +73,48 @@ public class EnemyAI : MonoBehaviour
     public void RunToEatenFood()
     {
         IsAngry = true;
+        StopMove();
+        SetPlayerTargetPoint();
+        IncreaseSpeed();
+        StartMove();
+    }
+
+    private void StartMove()
+    {
+        agent.isStopped = false;
+        IsMove = true;
+    }
+
+    void IncreaseSpeed()
+    {
+        agent.speed = speedEnemy * increaseSpeedBy;
+    }
+
+    void SetNormalSpeed()
+    {
+        agent.speed = speedEnemy;
+    }
+
+    public void Dirty()
+    {
+        Debug.Log("dirty");
+        IsAngry = false;
+        StopMove();
+        SetNormalSpeed();
+        IsDirty = true;
+        Invoke("Clean", timeToClean);
+    }
+
+    void Clean()
+    {
+        IsAngry = false;
+        StartWalk();
+    }
+
+    void StopMove()
+    {
         agent.isStopped = true;
         agent.ResetPath();
-        agent.isStopped = false;
-        SetPlayerTargetPoint();
-        agent.speed = speedEnemy * increaseSpeedBy;
+        IsMove = false;
     }
 }
