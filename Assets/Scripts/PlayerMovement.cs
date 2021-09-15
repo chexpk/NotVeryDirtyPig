@@ -38,37 +38,12 @@ public class PlayerMovement : MonoBehaviour
     void GetInput()
     {
         movement.x = joystick.Horizontal;
-        // if (joystick.Horizontal >= 0.2f)
-        // {
-        //     movement.x = moveSpeed;
-        // }
-        // else if (joystick.Horizontal >= -0.2f)
-        // {
-        //     movement.x = -moveSpeed;
-        // }
-        // else
-        // {
-        //     movement.x = 0;
-        // }
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
         }
 
         movement.y = joystick.Vertical;
-        // if (joystick.Vertical >= 0.2f)
-        // {
-        //     movement.y = moveSpeed;
-        // }
-        // else if (joystick.Vertical >= -0.2f)
-        // {
-        //     movement.y = -moveSpeed;
-        // }
-        // else
-        // {
-        //     movement.y = 0;
-        // }
-
         if (Input.GetAxisRaw("Vertical") != 0)
         {
             movement.y = Input.GetAxisRaw("Vertical");
@@ -80,5 +55,10 @@ public class PlayerMovement : MonoBehaviour
     private void ChangeZPositionOnScene()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+    }
+
+    public void SetIsMove(bool move)
+    {
+        IsMove = move;
     }
 }

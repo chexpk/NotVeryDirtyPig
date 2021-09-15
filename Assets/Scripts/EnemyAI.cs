@@ -33,21 +33,9 @@ public class EnemyAI : MonoBehaviour
         ChangeZPositionOnScene();
     }
 
-    public void SetPlayerTargetPoint()
+    void SetPlayerTargetPoint()
     {
         agent.SetDestination(targetPlayer.position);
-    }
-
-    void SetTargetPoint(Vector2 position)
-    {
-        agent.SetDestination(position);
-    }
-
-    Vector2 GetRandomPositionToMove()
-    {
-        int maxIndexOfArr = movementPositions.Length - 1;
-        int randomIndex = Random.Range(0, maxIndexOfArr);
-        return movementPositions[randomIndex].position;
     }
 
     void StartWalk()
@@ -62,12 +50,8 @@ public class EnemyAI : MonoBehaviour
             IsAngry = false;
             SetNormalSpeed();
             SetTargetPoint(GetRandomPositionToMove());
+            Debug.Log("steelWalk");
         }
-    }
-
-    private void ChangeZPositionOnScene()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 
     public void RunToEatenFood()
@@ -83,6 +67,13 @@ public class EnemyAI : MonoBehaviour
     {
         agent.isStopped = false;
         IsMove = true;
+    }
+
+    public void StopMove()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        IsMove = false;
     }
 
     void IncreaseSpeed()
@@ -108,13 +99,29 @@ public class EnemyAI : MonoBehaviour
     void Clean()
     {
         IsAngry = false;
+        StartMove();
         StartWalk();
     }
 
-    void StopMove()
+    void SetTargetPoint(Vector2 position)
     {
-        agent.isStopped = true;
-        agent.ResetPath();
-        IsMove = false;
+        agent.SetDestination(position);
+    }
+
+    Vector2 GetRandomPositionToMove()
+    {
+        int maxIndexOfArr = movementPositions.Length - 1;
+        int randomIndex = Random.Range(0, maxIndexOfArr);
+        return movementPositions[randomIndex].position;
+    }
+
+    void ChangeZPositionOnScene()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+    }
+
+    public void Restart()
+    {
+
     }
 }
