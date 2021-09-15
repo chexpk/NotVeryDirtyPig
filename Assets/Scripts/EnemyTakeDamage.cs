@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEatFood : MonoBehaviour
+public class EnemyTakeDamage : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +20,10 @@ public class PlayerEatFood : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Food>())
+        if (other.GetComponent<Explosion>())
         {
-            other.GetComponent<Food>().WasEaten();
-            //increase count 'coin'?
-            //send position to Enemy?
+            Debug.Log("take damage");
+            //change animation
         }
     }
 }

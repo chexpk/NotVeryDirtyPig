@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    FoodSpawner foodSpawner;
+
+    public void WasEaten()
     {
-        
+        foodSpawner.CreatFoodOnRandomPosition();
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetFoodSpawner(FoodSpawner spawner)
     {
-        
+        foodSpawner = spawner;
     }
 }

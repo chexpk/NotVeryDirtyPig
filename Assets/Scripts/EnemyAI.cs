@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform targetPlayer;
+    [SerializeField] private Transform[] movementPositions;
     private NavMeshAgent agent;
-    // Start is called before the first frame update
+    private bool IsAngry = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -18,11 +20,33 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Walk();
     }
 
     public void SetNewTargetPoint()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(targetPlayer.position);
+    }
+
+    void SetTargetPoint(Vector2 position)
+    {
+        agent.SetDestination(position);
+    }
+
+    Vector2 GetRandomPositionToMove()
+    {
+        int maxIndexOfArr = movementPositions.Length - 1;
+        int randomIndex = Random.Range(0, maxIndexOfArr);
+        return movementPositions[randomIndex].position;
+    }
+
+    void Walk()
+    {
+        if(IsAngry == true) return;
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            SetTargetPoint(GetRandomPositionToMove());
+        }
     }
 }
