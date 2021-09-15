@@ -1,15 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent (typeof (NavMeshAgent))]
-[RequireComponent (typeof (Animator))]
 public class EnemyAnimation : MonoBehaviour {
     Animator animator;
     NavMeshAgent agent;
-
-    // Vector2 smoothDeltaPosition = Vector2.zero;
-    // Vector2 velocity = Vector2.zero;
-
+    private bool IsDirty = false;
     void Start ()
     {
         animator = GetComponent<Animator> ();
@@ -18,6 +14,7 @@ public class EnemyAnimation : MonoBehaviour {
 
     void Update ()
     {
+        animator.SetBool("Dirty", IsDirty);
         animator.SetFloat ("Horizontal", GetVectorOfMovement().x);
         animator.SetFloat ("Vertical", GetVectorOfMovement().y);
         animator.SetFloat("Speed", agent.speed);
@@ -29,5 +26,10 @@ public class EnemyAnimation : MonoBehaviour {
         float y = Mathf.Clamp(vector.y, -1f, 1f);
         var result = new Vector2(x, y);
         return result;
+    }
+
+    public void SetIsDirty(bool dirty)
+    {
+        IsDirty = dirty;
     }
 }

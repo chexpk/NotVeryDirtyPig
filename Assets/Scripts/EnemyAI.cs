@@ -10,20 +10,22 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speedEnemy = 2.5f;
     [SerializeField] private int increaseSpeedBy = 3;
     [SerializeField] private float timeToClean = 3f;
-    private Vector3 respawnPoint = new Vector3(6.7f,-4.24f, -4.24f);
 
+    [SerializeField] private EnemyAnimation enemyAnimation;
 
+    private Vector3 respawnPoint = new Vector3(6.7f, -4.24f, -4.24f);
     private NavMeshAgent agent;
-    private bool IsAngry = false;
     private bool IsDirty = false;
     private bool IsMove = false;
 
 
     void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        enemyAnimation = GetComponent<EnemyAnimation>();
     }
 
     void Update()
@@ -47,16 +49,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            IsAngry = false;
             SetNormalSpeed();
             SetTargetPoint(GetRandomPositionToMove());
-            Debug.Log("steelWalk");
         }
     }
 
     public void RunToEatenFood()
     {
-        IsAngry = true;
+        if (IsDirty) return;
         StopMove();
         SetPlayerTargetPoint();
         IncreaseSpeed();
@@ -88,17 +88,17 @@ public class EnemyAI : MonoBehaviour
 
     public void Dirty()
     {
-        Debug.Log("dirty");
-        IsAngry = false;
         StopMove();
         SetNormalSpeed();
-        IsDirty = true;
+        SetIsDirty(true);
         Invoke("Clean", timeToClean);
+
     }
 
     void Clean()
     {
-        IsAngry = false;
+        SetIsDirty(false);
+        if (IsMove == false) return;
         StartMove();
         StartWalk();
     }
@@ -125,5 +125,11 @@ public class EnemyAI : MonoBehaviour
         transform.position = respawnPoint;
         IsMove = true;
         StartWalk();
+    }
+
+    void SetIsDirty(bool dirty)
+    {
+        IsDirty = dirty;
+        enemyAnimation.SetIsDirty(dirty);
     }
 }
