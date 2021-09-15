@@ -1003,7 +1003,7 @@ MonoBehaviour:
   - {fileID: 454930503}
   - {fileID: 1478096267}
   - {fileID: 2089664556}
-  foodPrefab: {fileID: 9063039718561541024, guid: e0905823a2c19402697714d473973706, type: 3}
+  foodPrefab: {fileID: 5007019374413296380, guid: e0905823a2c19402697714d473973706, type: 3}
 --- !u!1 &191633925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,7 +2107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 501747124}
-  - component: {fileID: 501747125}
   m_Layer: 0
   m_Name: PositionsEnemyMovement
   m_TagString: Untagged
@@ -2151,43 +2150,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &501747125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501747123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc8923ec8c0e43f6bc987d4d61b45c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transforms:
-  - {fileID: 529585500}
-  - {fileID: 1741119594}
-  - {fileID: 1001066597}
-  - {fileID: 2041130487}
-  - {fileID: 86931239}
-  - {fileID: 2129300447}
-  - {fileID: 1524418557}
-  - {fileID: 799542454}
-  - {fileID: 1745068782}
-  - {fileID: 1708280311}
-  - {fileID: 903729770}
-  - {fileID: 1772693672}
-  - {fileID: 1114257739}
-  - {fileID: 810922042}
-  - {fileID: 798607864}
-  - {fileID: 2076734544}
-  - {fileID: 527585289}
-  - {fileID: 992193627}
-  - {fileID: 1577915648}
-  - {fileID: 1456198083}
-  - {fileID: 0}
-  - {fileID: 1829022761}
-  - {fileID: 711047111}
-  foodPrefab: {fileID: 4944783867951794071, guid: e0905823a2c19402697714d473973706, type: 3}
 --- !u!1 &505969788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,6 +2665,8 @@ GameObject:
   - component: {fileID: 569094948}
   - component: {fileID: 569094944}
   - component: {fileID: 569094945}
+  - component: {fileID: 569094950}
+  - component: {fileID: 569094949}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2793,7 +2757,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0032415986, y: 0}
@@ -2807,7 +2771,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569094943}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -2820,6 +2784,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!249 &569094949
+AreaEffector2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569094943}
+  m_Enabled: 0
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGlobalAngle: 0
+  m_ForceAngle: 0
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_ForceTarget: 0
+  m_Drag: 0
+  m_AngularDrag: 0
+--- !u!114 &569094950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569094943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7defb85f841774597bd479d24adcf1be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &578272824
 GameObject:
   m_ObjectHideFlags: 0

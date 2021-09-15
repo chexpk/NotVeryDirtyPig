@@ -20,6 +20,7 @@ public class EnemyTakeDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.name);
         if (other.GetComponent<Explosion>())
         {
             Debug.Log("take damage");
