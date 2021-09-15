@@ -2,21 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerEatFood : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [SerializeField] private UnityEvent foodEaten;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Food>())
@@ -24,6 +14,7 @@ public class PlayerEatFood : MonoBehaviour
             other.GetComponent<Food>().WasEaten();
             //increase count 'coin'?
             //send position to Enemy?
+            foodEaten.Invoke();
         }
     }
 }

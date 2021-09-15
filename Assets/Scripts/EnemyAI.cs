@@ -17,13 +17,13 @@ public class EnemyAI : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Walk();
+        ChangeZPositionOnScene();
     }
 
-    public void SetNewTargetPoint()
+    public void SetPlayerTargetPoint()
     {
         agent.SetDestination(targetPlayer.position);
     }
@@ -47,6 +47,21 @@ public class EnemyAI : MonoBehaviour
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             SetTargetPoint(GetRandomPositionToMove());
+            // normalize speed
         }
+    }
+
+    private void ChangeZPositionOnScene()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+    }
+
+    public void RunToEatenFood()
+    {
+        Debug.Log("run");
+        IsAngry = true;
+        agent.isStopped = true;
+        agent.ResetPath();
+        SetPlayerTargetPoint();
     }
 }
