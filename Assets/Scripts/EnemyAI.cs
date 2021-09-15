@@ -10,11 +10,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speedEnemy = 2.5f;
     [SerializeField] private int increaseSpeedBy = 3;
     [SerializeField] private float timeToClean = 3f;
+    private Vector3 respawnPoint = new Vector3(6.7f,-4.24f, -4.24f);
+
 
     private NavMeshAgent agent;
     private bool IsAngry = false;
     private bool IsDirty = false;
-    private bool IsMove = true;
+    private bool IsMove = false;
 
 
     void Start()
@@ -22,8 +24,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-
-        StartWalk();
     }
 
     void Update()
@@ -122,6 +122,8 @@ public class EnemyAI : MonoBehaviour
 
     public void Restart()
     {
-
+        transform.position = respawnPoint;
+        IsMove = true;
+        StartWalk();
     }
 }

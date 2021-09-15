@@ -23,11 +23,14 @@ public class GameController : MonoBehaviour
     public void EndGame()
     {
         uiController.ShowRestartDisplay();
+
     }
 
     public void StartGame()
     {
         uiController.HideStartDisplay();
+        enemy.Restart();
+        player.Restart();
     }
 
     public void RestartGame()

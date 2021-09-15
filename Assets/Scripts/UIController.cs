@@ -35,10 +35,12 @@ public class UIController : MonoBehaviour
     public void ShowRestartDisplay()
     {
         restartGO.SetActive(true);
+        ShowControlUI(false);
     }
 
     public void HideRestartDisplay()
     {
         restartGO.SetActive(false);
+        ShowControlUI(true);
     }
 }

@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
     public void Restart()
     {
-
+        playerMovement.SetIsMove(true);
+        playerMovement.PutToSpawnPosition();
     }
 }

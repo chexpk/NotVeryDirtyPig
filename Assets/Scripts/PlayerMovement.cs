@@ -8,10 +8,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] private Rigidbody2D rb;
-
     [SerializeField] private Animator animator;
-
     [SerializeField] private Joystick joystick;
+
+    private Vector3 spawnPoint = new Vector3(-8.5f,0.8f, 0.8f);
     private Vector2 movement;
     private bool IsMove = true;
 
@@ -60,5 +60,10 @@ public class PlayerMovement : MonoBehaviour
     public void SetIsMove(bool move)
     {
         IsMove = move;
+    }
+
+    public void PutToSpawnPosition()
+    {
+        transform.position = spawnPoint;
     }
 }
